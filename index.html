@@ -431,6 +431,14 @@ document.addEventListener('click', async (e) => {
 
 $('redes').innerHTML = BIO.redes.map((r) => `
   <a href="${r.link}"${externo(r.link)} aria-label="${r.nome}" data-goatcounter-click="rede-${r.nome}">${ICONES[r.icone]}</a>`).join('');
+
+// Na prévia aberta direto do computador, links de pasta ("videomaker/") precisam apontar para o index.html
+if (location.protocol === 'file:') {
+  document.querySelectorAll('a[href]').forEach((a) => {
+    const h = a.getAttribute('href');
+    if (!/^([a-z]+:|#)/.test(h) && h.endsWith('/')) a.setAttribute('href', h + 'index.html');
+  });
+}
 </script>
 
 <!-- Contador de visitas: aparece no mesmo painel do portfólio, com o endereço deboradominique.com.br na frente -->
