@@ -121,7 +121,7 @@
   .final strong { display: block; font-family: 'Playfair Display', serif; font-weight: 500; font-size: 1.35rem; line-height: 1.25; color: var(--vinho); }
   .final span { display: block; margin-top: 6px; font-size: .86rem; color: var(--texto-suave); }
 
-  /* BOTÃO FIXO: Personalize seu orçamento (aparece ao rolar) */
+  /* BOTÃO FIXO: Personalize seu pacote (aparece ao rolar) */
   .fixo {
     position: fixed; left: 50%; bottom: 16px; z-index: 10; width: calc(100% - 32px); max-width: 448px;
     display: flex; justify-content: center; align-items: center; gap: 8px; padding: 15px; border-radius: 99px;
@@ -253,7 +253,7 @@ $('personalizado').innerHTML = `${ICONE_WHATS} Pedir proposta`;
 // Botão fixo: aparece depois do topo e some quando a chamada final já está na tela
 const fixo = $('botaoFixo');
 fixo.href = whats(VIDEOMAKER.mensagemPersonalizado);
-fixo.innerHTML = `${ICONE_WHATS} Personalize seu orçamento`;
+fixo.innerHTML = `${ICONE_WHATS} Personalize seu pacote`;
 let finalVisivel = false;
 const atualizarFixo = () => {
   const mostrar = window.scrollY > 300 && !finalVisivel;
