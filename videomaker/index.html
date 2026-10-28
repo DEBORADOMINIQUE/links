@@ -82,24 +82,7 @@
   .passo span { display: block; margin-top: 2px; font-size: .72rem; color: var(--texto-suave); line-height: 1.35; }
 
   /* PACOTES */
-  /* Pacotes lado a lado: no celular desliza para o lado; no computador os três aparecem juntos */
-  .pacotes {
-    display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none;
-    margin: 0 -16px; padding: 4px 16px 18px; scroll-padding: 0 16px;
-  }
-  .pacotes::-webkit-scrollbar { display: none; }
-  .pacotes > .pacote { flex: 0 0 82%; scroll-snap-align: start; display: flex; flex-direction: column; }
-  .pacotes > .pacote .quero { margin-top: auto; }
-  .pacotes > .pacote .etiqueta { align-self: flex-start; }
-  .pacotes > .pacote .itens { margin-bottom: 18px; }
-  .dica-deslize { margin-top: 2px; text-align: center; font-size: .75rem; letter-spacing: .08em; color: var(--dourado); font-weight: 600; }
-  @media (min-width: 760px) {
-    .pacotes {
-      position: relative; left: 50%; transform: translateX(-50%); width: min(960px, calc(100vw - 48px));
-      margin: 0; padding: 4px 0 18px; overflow: visible; display: grid; grid-template-columns: repeat(3, 1fr);
-    }
-    .dica-deslize { display: none; }
-  }
+  .pacotes { display: grid; gap: 14px; }
   .pacote { position: relative; padding: 20px; border-radius: 20px; background: var(--papel); border: 1px solid var(--borda); }
   .pacote.destaque {
     background: linear-gradient(135deg, var(--vinho) 0%, var(--vinho-escuro) 100%); color: var(--creme-claro); border: 0;
@@ -192,7 +175,6 @@
   <section class="bloco" aria-labelledby="tituloPacotes">
     <h2 class="rotulo" id="tituloPacotes">Pacotes</h2>
     <div class="pacotes" id="pacotes"></div>
-    <p class="dica-deslize" aria-hidden="true">Deslize para ver mais →</p>
   </section>
 
   <section class="bloco" aria-labelledby="tituloIncluso">
