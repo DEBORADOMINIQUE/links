@@ -52,6 +52,13 @@
   .nome { font-family: 'Playfair Display', serif; font-weight: 600; font-size: 2.1rem; line-height: 1.1; color: var(--vinho); }
   .profissao { margin-top: 8px; font-size: .72rem; letter-spacing: .22em; text-transform: uppercase; color: var(--texto-suave); }
   .arroba { display: inline-block; margin-top: 6px; font-size: .85rem; font-weight: 500; color: var(--vinho); }
+  .email-topo {
+    display: flex; width: fit-content; max-width: 100%; align-items: center; gap: 8px; margin: 12px auto 0; padding: 8px 16px; border-radius: 99px;
+    border: 1px solid var(--dourado); background: var(--papel); color: var(--vinho); font-size: .88rem; font-weight: 600;
+    transition: background .2s ease;
+  }
+  .email-topo:hover { background: rgba(201, 168, 106, .15); }
+  .email-topo svg { width: 18px; height: 18px; color: var(--dourado); }
   .arroba:hover { text-decoration: underline; text-decoration-color: var(--dourado); }
   html { scroll-behavior: smooth; }
   .frase { margin: 16px auto 0; max-width: 34ch; color: var(--texto-suave); font-size: .95rem; }
@@ -231,6 +238,10 @@
     <h1 class="nome">Débora Dominique</h1>
     <p class="profissao">UGC Creator · Videomaker Mobile</p>
     <a class="arroba" href="https://www.instagram.com/deboradominique_/" target="_blank" rel="noopener" data-goatcounter-click="arroba">@deboradominique_</a>
+    <a class="email-topo" id="emailTopo" data-goatcounter-click="email-topo">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm9 7.2L4.4 7H4v.6l8 5.6 8-5.6V7h-.4L12 12.2z"/></svg>
+      <span id="emailTopoTexto"></span>
+    </a>
     <p class="frase" id="frase"></p>
   </header>
 
@@ -298,10 +309,10 @@ const BIO = {
   // Link vazio ('') esconde o botão até ele ser preenchido
   linksMarcas: [
     { icone: 'whatsapp', titulo: 'WhatsApp', texto: '(31) 98404-2252', link: `https://wa.me/${WHATSAPP}?text=${encodeURIComponent('Olá, Débora! Vi seu link na bio e quero conversar sobre UGC para a minha marca.')}`, clique: 'whatsapp' },
+    { icone: 'email', titulo: 'E-mail para propostas', texto: EMAIL, link: `mailto:${EMAIL}?subject=${encodeURIComponent('Proposta de parceria UGC')}`, clique: 'email' },
     { icone: 'cupom', titulo: 'Meus cupons', texto: 'Descontos exclusivos nas marcas que eu uso', link: '#blocoCupons', clique: 'meus-cupons' },
     { icone: 'pacotes', titulo: 'Serviços digitais', selo: 'NOVO', texto: 'Videomaker, landing page, portfólio e bio link', link: '#blocoServicos', clique: 'servicos' },
     { icone: 'youtube', titulo: 'YouTube', texto: 'Vida Real de Tudo Um Pouco', link: 'https://www.youtube.com/@deboradominiques', clique: 'youtube' }, // EDITE AQUI: link do canal
-    { icone: 'email', titulo: 'E-mail', texto: EMAIL, link: `mailto:${EMAIL}?subject=${encodeURIComponent('Parceria UGC')}`, clique: 'email' },
     { icone: 'linkedin', titulo: 'LinkedIn', texto: 'Conecte-se comigo', link: 'https://www.linkedin.com/in/d%C3%A9bora-dominique-29b6443a8/', clique: 'linkedin' }
   ],
 
@@ -349,6 +360,8 @@ const $ = (id) => document.getElementById(id);
 const externo = (link) => /^(mailto:|#)/.test(link) ? '' : ' target="_blank" rel="noopener"';
 
 $('frase').textContent = BIO.frase;
+$('emailTopo').href = `mailto:${EMAIL}?subject=${encodeURIComponent('Proposta de parceria UGC')}`;
+$('emailTopoTexto').textContent = EMAIL;
 $('botaoPrincipal').href = BIO.portfolio;
 $('fixoPortfolio').href = BIO.portfolio;
 $('fixoOrcamento').href = BIO.orcamento;

@@ -66,6 +66,14 @@
   .tags { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 18px; }
   .tags span { padding: 6px 12px; border-radius: 99px; border: 1px solid var(--borda); background: var(--papel); font-size: .78rem; color: var(--texto-suave); }
 
+  .email-topo {
+    display: flex; width: fit-content; max-width: 100%; align-items: center; gap: 8px; margin: 16px auto 0; padding: 8px 16px; border-radius: 99px;
+    border: 1px solid var(--dourado); background: var(--papel); color: var(--vinho); font-size: .88rem; font-weight: 600;
+    transition: background .2s ease;
+  }
+  .email-topo:hover { background: rgba(201, 168, 106, .15); }
+  .email-topo svg { width: 18px; height: 18px; color: var(--dourado); }
+
   /* COMO FUNCIONA */
   .passos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
   .passo { padding: 14px 10px; border-radius: 16px; background: var(--papel); border: 1px solid var(--borda); text-align: center; }
@@ -153,6 +161,10 @@
     <h1>Vídeos que fazem o seu negócio <em>ser visto.</em></h1>
     <p class="subtitulo" id="subtitulo"></p>
     <div class="tags" id="tags"></div>
+    <a class="email-topo" id="emailTopo" data-goatcounter-click="videomaker-email-topo">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm9 7.2L4.4 7H4v.6l8 5.6 8-5.6V7h-.4L12 12.2z"/></svg>
+      <span id="emailTopoTexto"></span>
+    </a>
   </header>
 
   <section class="bloco" aria-labelledby="tituloComo">
@@ -187,6 +199,7 @@
 // EDITE AQUI: tudo o que aparece na página
 // ============================================================
 const WHATSAPP = '5531984042252';
+const EMAIL = 'contato@deboradominique.com';
 
 const VIDEOMAKER = {
   subtitulo: 'Eu vou até você, gravo com o celular e entrego Reels editados, prontos para postar e atrair clientes.',
@@ -229,6 +242,8 @@ const ICONE_WHATS = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a
 const ICONE_CHECK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>';
 
 $('subtitulo').textContent = VIDEOMAKER.subtitulo;
+$('emailTopo').href = `mailto:${EMAIL}?subject=${encodeURIComponent('Orçamento de videomaker mobile')}`;
+$('emailTopoTexto').textContent = EMAIL;
 $('tags').innerHTML = VIDEOMAKER.paraQuem.map((t) => `<span>${t}</span>`).join('');
 
 $('passos').innerHTML = VIDEOMAKER.passos.map((p, i) => `
