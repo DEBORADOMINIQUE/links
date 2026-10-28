@@ -82,7 +82,24 @@
   .passo span { display: block; margin-top: 2px; font-size: .72rem; color: var(--texto-suave); line-height: 1.35; }
 
   /* PACOTES */
-  .pacotes { display: grid; gap: 14px; }
+  /* Pacotes lado a lado: no celular desliza para o lado; no computador os três aparecem juntos */
+  .pacotes {
+    display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none;
+    margin: 0 -16px; padding: 4px 16px 18px; scroll-padding: 0 16px;
+  }
+  .pacotes::-webkit-scrollbar { display: none; }
+  .pacotes > .pacote { flex: 0 0 82%; scroll-snap-align: start; display: flex; flex-direction: column; }
+  .pacotes > .pacote .quero { margin-top: auto; }
+  .pacotes > .pacote .etiqueta { align-self: flex-start; }
+  .pacotes > .pacote .itens { margin-bottom: 18px; }
+  .dica-deslize { margin-top: 2px; text-align: center; font-size: .75rem; letter-spacing: .08em; color: var(--dourado); font-weight: 600; }
+  @media (min-width: 760px) {
+    .pacotes {
+      position: relative; left: 50%; transform: translateX(-50%); width: min(960px, calc(100vw - 48px));
+      margin: 0; padding: 4px 0 18px; overflow: visible; display: grid; grid-template-columns: repeat(3, 1fr);
+    }
+    .dica-deslize { display: none; }
+  }
   .pacote { position: relative; padding: 20px; border-radius: 20px; background: var(--papel); border: 1px solid var(--borda); }
   .pacote.destaque {
     background: linear-gradient(135deg, var(--vinho) 0%, var(--vinho-escuro) 100%); color: var(--creme-claro); border: 0;
@@ -175,12 +192,18 @@
   <section class="bloco" aria-labelledby="tituloPacotes">
     <h2 class="rotulo" id="tituloPacotes">Pacotes</h2>
     <div class="pacotes" id="pacotes"></div>
+    <p class="dica-deslize" aria-hidden="true">Deslize para ver mais →</p>
   </section>
 
   <section class="bloco" aria-labelledby="tituloIncluso">
     <h2 class="rotulo" id="tituloIncluso">Em todos os pacotes</h2>
     <ul class="incluso" id="incluso"></ul>
     <p class="observacao" id="observacao"></p>
+  </section>
+
+  <section class="bloco" aria-labelledby="tituloEdicao">
+    <h2 class="rotulo" id="tituloEdicao">Já tem o vídeo gravado?</h2>
+    <div id="soEdicao"></div>
   </section>
 
   <div class="final">
@@ -230,6 +253,14 @@ const VIDEOMAKER = {
     }
   ],
 
+  // EDITE AQUI: para quem já tem o vídeo gravado e só precisa da edição
+  soEdicao: {
+    nome: 'Só edição', resumo: 'Você grava, eu edito', preco: 'R$ 150', unidade: 'vídeo',
+    itens: ['Cortes simples', 'Legenda dinâmica'],
+    botao: 'Quero só a edição',
+    mensagem: 'Olá, Débora! Já tenho o vídeo gravado e quero orçamento de edição.'
+  },
+
   incluso: ['Roteiro pensado antes da gravação', 'Equipamento próprio', 'Edição com legendas', 'Trilhas licenciadas', 'Até 2 ajustes por vídeo', 'Entrega em até 10 dias corridos'],
   observacao: 'Atendimento em Belo Horizonte. Para outras cidades, consulte o valor do deslocamento.',
   mensagemPersonalizado: 'Olá, Débora! Vi seus pacotes de videomaker e quero uma proposta personalizada.'
@@ -249,16 +280,19 @@ $('tags').innerHTML = VIDEOMAKER.paraQuem.map((t) => `<span>${t}</span>`).join('
 $('passos').innerHTML = VIDEOMAKER.passos.map((p, i) => `
   <div class="passo"><b>${i + 1}</b><strong>${p.titulo}</strong><span>${p.texto}</span></div>`).join('');
 
-$('pacotes').innerHTML = VIDEOMAKER.pacotes.map((p) => `
+const cartaoPacote = (p) => `
   <article class="pacote${p.destaque ? ' destaque' : ''}">
     ${p.etiqueta ? `<span class="etiqueta">${p.etiqueta}</span>` : ''}
     <div class="cabeca">
       <div><h3>${p.nome}</h3><span class="resumo">${p.resumo}</span></div>
-      <div class="preco"><small>Investimento</small><b>${p.preco}${p.mensal ? '<i>/mês</i>' : ''}</b></div>
+      <div class="preco"><small>Investimento</small><b>${p.preco}${p.mensal ? '<i>/mês</i>' : ''}${p.unidade ? `<i>/${p.unidade}</i>` : ''}</b></div>
     </div>
     <ul class="itens">${p.itens.map((i) => `<li>${ICONE_CHECK}${i}</li>`).join('')}</ul>
-    <a class="quero" href="${whats(p.mensagem)}" target="_blank" rel="noopener" data-goatcounter-click="videomaker-${p.nome}">${ICONE_WHATS} Quero o ${p.nome}</a>
-  </article>`).join('');
+    <a class="quero" href="${whats(p.mensagem)}" target="_blank" rel="noopener" data-goatcounter-click="videomaker-${p.nome}">${ICONE_WHATS} ${p.botao || `Quero o ${p.nome}`}</a>
+  </article>`;
+
+$('pacotes').innerHTML = VIDEOMAKER.pacotes.map(cartaoPacote).join('');
+$('soEdicao').innerHTML = cartaoPacote(VIDEOMAKER.soEdicao);
 
 $('incluso').innerHTML = VIDEOMAKER.incluso.map((i) => `<li>${ICONE_CHECK}${i}</li>`).join('');
 $('observacao').textContent = VIDEOMAKER.observacao;

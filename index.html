@@ -191,6 +191,7 @@
   .linha-servico .valor { grid-column: 2; grid-row: 1 / span 2; text-align: right; white-space: nowrap; }
   .linha-servico .valor s { display: block; font-size: .72rem; color: var(--texto-suave); }
   .linha-servico .valor b { font-family: 'Playfair Display', serif; font-weight: 600; font-size: 1.1rem; color: var(--vinho); }
+  .linha-servico .valor small { display: block; font-size: .68rem; color: var(--texto-suave); }
   .linha-servico .seta { grid-column: 3; grid-row: 1 / span 2; color: var(--dourado); width: 18px; height: 18px; }
   .nota-dominio { margin-top: 12px; padding: 0 12px; text-align: center; font-size: .75rem; color: var(--texto-suave); }
   .grupo .rodape-grupo { padding: 12px 18px 14px; border-top: 1px solid var(--borda); font-size: .75rem; color: var(--texto-suave); text-align: center; }
@@ -311,7 +312,7 @@ const BIO = {
     { icone: 'whatsapp', titulo: 'WhatsApp', texto: '(31) 98404-2252', link: `https://wa.me/${WHATSAPP}?text=${encodeURIComponent('Olá, Débora! Vi seu link na bio e quero conversar sobre UGC para a minha marca.')}`, clique: 'whatsapp' },
     { icone: 'email', titulo: 'E-mail para propostas', texto: EMAIL, link: `mailto:${EMAIL}?subject=${encodeURIComponent('Proposta de parceria UGC')}`, clique: 'email' },
     { icone: 'cupom', titulo: 'Meus cupons', texto: 'Descontos exclusivos nas marcas que eu uso', link: '#blocoCupons', clique: 'meus-cupons' },
-    { icone: 'pacotes', titulo: 'Serviços digitais', selo: 'NOVO', texto: 'Videomaker, landing page, portfólio e bio link', link: '#blocoServicos', clique: 'servicos' },
+    { icone: 'pacotes', titulo: 'Serviços digitais', selo: 'NOVO', texto: 'Videomaker, edição de vídeo, landing page, portfólio e bio link', link: '#blocoServicos', clique: 'servicos' },
     { icone: 'youtube', titulo: 'YouTube', texto: 'Vida Real de Tudo Um Pouco', link: 'https://www.youtube.com/@deboradominiques', clique: 'youtube' }, // EDITE AQUI: link do canal
     { icone: 'linkedin', titulo: 'LinkedIn', texto: 'Conecte-se comigo', link: 'https://www.linkedin.com/in/d%C3%A9bora-dominique-29b6443a8/', clique: 'linkedin' }
   ],
@@ -328,6 +329,8 @@ const BIO = {
   // EDITE AQUI: serviços (destaque: true = cartão grande | etiqueta, precoAntigo e precoRotulo são opcionais | pagina: abre uma página de pacotes em vez do WhatsApp)
   servicos: [
     { nome: 'Videomaker Mobile', etiqueta: 'Para negócios', destaque: true, precoRotulo: 'A partir de', preco: 'R$ 600', texto: 'Eu vou até o seu negócio, gravo e entrego Reels editados, prontos para postar.', pagina: 'videomaker/' },
+    // grupo: 'video' = aparece no cartão "Já tem o vídeo gravado?", logo abaixo do Videomaker | unidade: texto pequeno ao lado do preço
+    { nome: 'Edição de vídeo', grupo: 'video', preco: 'R$ 150', unidade: 'por vídeo', texto: 'Cortes simples e legenda dinâmica', mensagem: 'Olá, Débora! Vi sua bio link e quero orçamento de edição de vídeo.' },
     { nome: 'Landing page de vendas', etiqueta: 'Para marcas', destaque: true, preco: 'R$ 1.200', texto: 'Uma página feita para transformar visita em cliente. Já desenvolvi para marca do setor de pagamentos.', mensagem: 'Olá, Débora! Vi sua bio link e quero uma landing page de vendas.' },
     { nome: 'Portfólio + bio link', etiqueta: 'Combo', precoAntigo: 'R$ 1.180', preco: 'R$ 990', texto: 'Tudo pronto para fechar com marcas', mensagem: 'Olá, Débora! Vi sua bio link e quero o combo portfólio + bio link.' },
     { nome: 'Portfólio profissional', preco: 'R$ 890', texto: 'Site de uma página, do seu jeito', mensagem: 'Olá, Débora! Vi sua bio link e quero um portfólio profissional.' },
@@ -384,7 +387,22 @@ $('listaMarcas').innerHTML = BIO.linksMarcas.filter((l) => l.link).map((l) => `
   </a>`).join('');
 
 const linkServico = (s) => `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(s.mensagem)}`;
-const servicosMenores = BIO.servicos.filter((s) => !s.destaque);
+const servicosMenores = BIO.servicos.filter((s) => !s.destaque && !s.grupo);
+const servicosVideo = BIO.servicos.filter((s) => s.grupo === 'video');
+
+// Cartão com serviços em linhas (cada linha abre o WhatsApp)
+const grupoServicos = (titulo, lista) => !lista.length ? '' : `
+  <div class="grupo">
+    <h3>${titulo}</h3>
+    ${lista.map((s) => `
+    <a class="linha-servico" href="${linkServico(s)}" target="_blank" rel="noopener" data-goatcounter-click="servico-${s.nome}">
+      <strong>${s.nome}${s.etiqueta ? `<span class="etiqueta-mini">${s.etiqueta}</span>` : ''}</strong>
+      <span class="valor">${s.precoAntigo ? `<s>${s.precoAntigo}</s>` : ''}<b>${s.preco}</b>${s.unidade ? `<small>${s.unidade}</small>` : ''}</span>
+      ${ICONES.seta}
+      <span class="descricao">${s.texto}</span>
+    </a>`).join('')}
+    <p class="rodape-grupo">Toque no serviço para falar comigo no WhatsApp</p>
+  </div>`;
 
 const cartaoServico = (s) => `
   <article class="servico destaque">
@@ -400,19 +418,10 @@ const cartaoServico = (s) => `
   </article>`;
 
 // Serviços com página própria (videomaker) vêm antes da chamada "Gostou desta página?"; os sites vêm depois
-$('servicosTopo').innerHTML = BIO.servicos.filter((s) => s.destaque && s.pagina).map(cartaoServico).join('');
-$('listaServicos').innerHTML = BIO.servicos.filter((s) => s.destaque && !s.pagina).map(cartaoServico).join('') + (servicosMenores.length ? `
-  <div class="grupo">
-    <h3>Para criadoras de conteúdo</h3>
-    ${servicosMenores.map((s) => `
-    <a class="linha-servico" href="${linkServico(s)}" target="_blank" rel="noopener" data-goatcounter-click="servico-${s.nome}">
-      <strong>${s.nome}${s.etiqueta ? `<span class="etiqueta-mini">${s.etiqueta}</span>` : ''}</strong>
-      <span class="valor">${s.precoAntigo ? `<s>${s.precoAntigo}</s>` : ''}<b>${s.preco}</b></span>
-      ${ICONES.seta}
-      <span class="descricao">${s.texto}</span>
-    </a>`).join('')}
-    <p class="rodape-grupo">Toque no serviço para falar comigo no WhatsApp</p>
-  </div>` : '');
+$('servicosTopo').innerHTML = BIO.servicos.filter((s) => s.destaque && s.pagina).map(cartaoServico).join('')
+  + grupoServicos('Já tem o vídeo gravado?', servicosVideo);
+$('listaServicos').innerHTML = BIO.servicos.filter((s) => s.destaque && !s.pagina).map(cartaoServico).join('')
+  + grupoServicos('Para criadoras de conteúdo', servicosMenores);
 
 if (BIO.cupons.length) {
   $('blocoCupons').hidden = false;
