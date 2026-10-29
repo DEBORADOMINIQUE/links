@@ -75,6 +75,11 @@
   .email-topo svg { width: 18px; height: 18px; color: var(--dourado); }
 
   /* COMO FUNCIONA */
+  .especialidade { padding: 22px 20px; border-radius: 20px; background: var(--papel); border: 1px solid var(--borda); }
+  .especialidade h3 { font-family: 'Playfair Display', serif; font-weight: 600; font-size: 1.45rem; line-height: 1.2; color: var(--vinho); }
+  .especialidade h3 em { font-style: italic; font-weight: 500; color: var(--dourado); }
+  .especialidade .incluso { padding: 0; border: 0; background: none; box-shadow: none; }
+  .especialidade p { margin: 10px 0 14px; font-size: .9rem; line-height: 1.55; color: var(--texto-suave); }
   .passos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
   .passo { padding: 14px 10px; border-radius: 16px; background: var(--papel); border: 1px solid var(--borda); text-align: center; }
   .passo b { display: grid; place-items: center; width: 28px; height: 28px; margin: 0 auto 8px; border-radius: 50%; background: var(--vinho); color: var(--creme-claro); font-family: 'Playfair Display', serif; font-size: .9rem; }
@@ -167,6 +172,15 @@
     </a>
   </header>
 
+  <section class="bloco" aria-labelledby="tituloEspecialidade">
+    <h2 class="rotulo" id="tituloEspecialidade">Especialista em beleza</h2>
+    <div class="especialidade">
+      <h3 id="especialidadeTitulo"></h3>
+      <p id="especialidadeTexto"></p>
+      <ul class="incluso" id="especialidadePontos"></ul>
+    </div>
+  </section>
+
   <section class="bloco" aria-labelledby="tituloComo">
     <h2 class="rotulo" id="tituloComo">Como funciona</h2>
     <div class="passos" id="passos"></div>
@@ -208,7 +222,14 @@ const EMAIL = 'contato@deboradominique.com';
 
 const VIDEOMAKER = {
   subtitulo: 'Eu vou até você, gravo com o celular e entrego Reels editados, prontos para postar e atrair clientes.',
-  paraQuem: ['Restaurantes e cafés', 'Lojas', 'Clínicas e estúdios', 'Eventos', 'Prestadores de serviço'],
+  paraQuem: ['Salões e cabeleireiros', 'Restaurantes e cafés', 'Lojas', 'Clínicas e estúdios', 'Eventos', 'Prestadores de serviço'],
+
+  // EDITE AQUI: bloco "Especialista em beleza"
+  especialidade: {
+    titulo: 'Fui cabeleireira por <em>10 anos.</em>',
+    texto: 'Sei o que valoriza um cabelo na câmera: o ângulo que mostra o brilho, o movimento e o resultado de verdade. E cresci o meu próprio perfil sozinha, então sei o que segura a atenção de quem está rolando o feed.',
+    pontos: ['Ângulos e luz que valorizam o cabelo', 'Antes e depois que mostram o seu trabalho', 'Olhar de quem já esteve atrás da cadeira', 'Vídeos pensados para atrair novos clientes']
+  },
 
   passos: [
     { titulo: 'Briefing', texto: 'Entendo o seu negócio e o objetivo' },
@@ -258,6 +279,10 @@ $('subtitulo').textContent = VIDEOMAKER.subtitulo;
 $('emailTopo').href = `mailto:${EMAIL}?subject=${encodeURIComponent('Orçamento de videomaker mobile')}`;
 $('emailTopoTexto').textContent = EMAIL;
 $('tags').innerHTML = VIDEOMAKER.paraQuem.map((t) => `<span>${t}</span>`).join('');
+
+$('especialidadeTitulo').innerHTML = VIDEOMAKER.especialidade.titulo;
+$('especialidadeTexto').textContent = VIDEOMAKER.especialidade.texto;
+$('especialidadePontos').innerHTML = VIDEOMAKER.especialidade.pontos.map((i) => `<li>${ICONE_CHECK}${i}</li>`).join('');
 
 $('passos').innerHTML = VIDEOMAKER.passos.map((p, i) => `
   <div class="passo"><b>${i + 1}</b><strong>${p.titulo}</strong><span>${p.texto}</span></div>`).join('');
