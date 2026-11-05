@@ -100,10 +100,6 @@
   .cabeca { display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; }
   .pacote h3 { font-family: 'Playfair Display', serif; font-weight: 500; font-size: 1.35rem; line-height: 1.2; }
   .pacote .resumo { display: block; margin-top: 2px; font-size: .82rem; color: var(--texto-suave); }
-  .preco { text-align: right; white-space: nowrap; }
-  .preco small { display: block; font-size: .6rem; letter-spacing: .14em; text-transform: uppercase; color: var(--texto-suave); }
-  .preco b { font-family: 'Playfair Display', serif; font-weight: 600; font-size: 1.45rem; color: var(--vinho); }
-  .preco b i { font-style: normal; font-family: 'Inter', sans-serif; font-size: .7rem; font-weight: 500; }
   .itens { list-style: none; margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--borda); display: grid; gap: 8px; }
   .itens li { display: flex; gap: 10px; align-items: flex-start; font-size: .87rem; }
   .itens svg { width: 16px; height: 16px; margin-top: 3px; color: var(--dourado); }
@@ -113,8 +109,7 @@
   }
   .quero:hover { background: var(--vinho-escuro); }
   .quero svg { width: 18px; height: 18px; }
-  .pacote.destaque .resumo, .pacote.destaque .preco small { color: rgba(247, 240, 225, .75); }
-  .pacote.destaque .preco b { color: var(--dourado); }
+  .pacote.destaque .resumo { color: rgba(247, 240, 225, .75); }
   .pacote.destaque .itens { border-top-color: rgba(201, 168, 106, .3); }
   .pacote.destaque .quero { background: var(--dourado); color: var(--marrom); }
   .pacote.destaque .quero:hover { background: var(--creme); }
@@ -237,35 +232,35 @@ const VIDEOMAKER = {
     { titulo: 'Entrega', texto: 'Reels editados e prontos' }
   ],
 
-  // destaque: true = cartão vinho | etiqueta é opcional | mensal: true mostra "/mês" no preço
+  // destaque: true = cartão vinho | etiqueta é opcional
   pacotes: [
     {
-      nome: 'Essencial', resumo: 'Para começar a aparecer', preco: 'R$ 600',
+      nome: 'Essencial', resumo: 'Para começar a aparecer',
       itens: ['1 captação de até 2 horas', '3 Reels editados'],
-      mensagem: 'Olá, Débora! Vi seus pacotes de videomaker e quero o pacote Essencial.'
+      mensagem: 'Olá, Débora! Vi seus pacotes de videomaker e quero um orçamento do pacote Essencial.'
     },
     {
-      nome: 'Presença', resumo: 'Conteúdo para o mês inteiro', preco: 'R$ 1.000', etiqueta: 'Melhor custo por vídeo', destaque: true,
+      nome: 'Presença', resumo: 'Conteúdo para o mês inteiro', destaque: true,
       itens: ['1 captação de até 3 horas', '6 Reels editados'],
-      mensagem: 'Olá, Débora! Vi seus pacotes de videomaker e quero o pacote Presença.'
+      mensagem: 'Olá, Débora! Vi seus pacotes de videomaker e quero um orçamento do pacote Presença.'
     },
     {
-      nome: 'Mensal', resumo: 'Seu perfil sempre ativo', preco: 'R$ 1.500', mensal: true,
+      nome: 'Mensal', resumo: 'Seu perfil sempre ativo',
       itens: ['2 captações por mês, de até 2 horas cada', '8 Reels editados por mês'],
-      mensagem: 'Olá, Débora! Vi seus pacotes de videomaker e quero saber mais sobre o pacote Mensal.'
+      mensagem: 'Olá, Débora! Vi seus pacotes de videomaker e quero um orçamento do pacote Mensal.'
     }
   ],
 
   // EDITE AQUI: para quem já tem o vídeo gravado e só precisa da edição
   soEdicao: {
-    nome: 'Só edição', resumo: 'Você grava, eu edito', preco: 'R$ 150', unidade: 'vídeo',
+    nome: 'Só edição', resumo: 'Você grava, eu edito',
     itens: ['Cortes simples', 'Legenda dinâmica'],
     botao: 'Quero só a edição',
     mensagem: 'Olá, Débora! Já tenho o vídeo gravado e quero orçamento de edição.'
   },
 
   incluso: ['Roteiro pensado antes da gravação', 'Equipamento próprio', 'Edição com legendas', 'Trilhas licenciadas', 'Até 2 ajustes por vídeo', 'Entrega em até 10 dias corridos'],
-  observacao: 'Atendimento em Belo Horizonte. Para outras cidades, consulte o valor do deslocamento.',
+  observacao: 'O valor depende do que o seu negócio precisa, então a proposta é feita na nossa conversa. Atendimento em Belo Horizonte. Para outras cidades, consulte o valor do deslocamento.',
   mensagemPersonalizado: 'Olá, Débora! Vi seus pacotes de videomaker e quero uma proposta personalizada.'
 };
 // ============================================================
@@ -292,7 +287,6 @@ const cartaoPacote = (p) => `
     ${p.etiqueta ? `<span class="etiqueta">${p.etiqueta}</span>` : ''}
     <div class="cabeca">
       <div><h3>${p.nome}</h3><span class="resumo">${p.resumo}</span></div>
-      <div class="preco"><small>Investimento</small><b>${p.preco}${p.mensal ? '<i>/mês</i>' : ''}${p.unidade ? `<i>/${p.unidade}</i>` : ''}</b></div>
     </div>
     <ul class="itens">${p.itens.map((i) => `<li>${ICONE_CHECK}${i}</li>`).join('')}</ul>
     <a class="quero" href="${whats(p.mensagem)}" target="_blank" rel="noopener" data-goatcounter-click="videomaker-${p.nome}">${ICONE_WHATS} ${p.botao || `Quero o ${p.nome}`}</a>

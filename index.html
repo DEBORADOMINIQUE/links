@@ -188,11 +188,6 @@
     background: var(--dourado); color: var(--marrom); font-size: .56rem; letter-spacing: .1em; font-weight: 600; text-transform: uppercase;
   }
   .linha-servico .descricao { grid-column: 1; font-size: .8rem; color: var(--texto-suave); }
-  .linha-servico .valor { grid-column: 2; grid-row: 1 / span 2; text-align: right; white-space: nowrap; }
-  .linha-servico .valor s { display: block; font-size: .72rem; color: var(--texto-suave); }
-  .linha-servico .valor b { font-family: 'Playfair Display', serif; font-weight: 600; font-size: 1.1rem; color: var(--vinho); }
-  .linha-servico .valor small { display: block; font-size: .68rem; color: var(--texto-suave); }
-  .linha-servico .valor.texto b { font-size: .9rem; }
   .linha-servico .seta { grid-column: 3; grid-row: 1 / span 2; color: var(--dourado); width: 18px; height: 18px; }
   .nota-dominio { margin-top: 12px; padding: 0 12px; text-align: center; font-size: .75rem; color: var(--texto-suave); }
   .grupo .rodape-grupo { padding: 12px 18px 14px; border-top: 1px solid var(--borda); font-size: .75rem; color: var(--texto-suave); text-align: center; }
@@ -202,10 +197,6 @@
   .servico.destaque { border: 1px solid var(--dourado); box-shadow: 0 10px 26px rgba(61, 11, 20, .08); }
   .servico .topo-servico { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
   .servico h3 { font-family: 'Playfair Display', serif; font-weight: 500; font-size: 1.2rem; line-height: 1.25; }
-  .servico .preco { text-align: right; white-space: nowrap; }
-  .servico .preco small { display: block; font-size: .6rem; letter-spacing: .14em; text-transform: uppercase; color: var(--texto-suave); }
-  .servico .preco s { display: block; font-size: .75rem; color: var(--texto-suave); }
-  .servico .preco b { font-family: 'Playfair Display', serif; font-weight: 600; font-size: 1.25rem; color: var(--vinho); }
   .servico p { margin-top: 8px; font-size: .85rem; color: var(--texto-suave); }
   .servico .etiqueta {
     display: inline-block; margin-bottom: 10px; padding: 3px 9px; border-radius: 99px;
@@ -270,7 +261,7 @@
       <span>Sites que vendem por você, com a sua identidade.</span>
     </div>
     <div class="servicos" id="listaServicos"></div>
-    <p class="nota-dominio">Nos sites, o domínio (endereço, como seunome.com.br) é contratado e pago pelo cliente, cerca de R$ 40 por ano. Eu cuido de toda a configuração.</p>
+    <p class="nota-dominio">Nos sites, o domínio (endereço, como seunome.com.br) é contratado pelo cliente. Eu cuido de toda a configuração.</p>
   </section>
 
   <section class="bloco" id="blocoCupons" aria-labelledby="tituloCupons" hidden>
@@ -327,16 +318,16 @@ const BIO = {
     { marca: 'Pink Cheeks', desconto: 'Copie o código e use no carrinho', codigo: 'PNK-DOMINIQUE', link: 'https://pinkcheeks.com.br/', botao: 'Ir à loja', logo: 'img/logos/pinkcheeks.jpg' }
   ],
 
-  // EDITE AQUI: serviços (destaque: true = cartão grande | etiqueta, precoAntigo e precoRotulo são opcionais | pagina: abre uma página de pacotes em vez do WhatsApp)
+  // EDITE AQUI: serviços (destaque: true = cartão grande | etiqueta é opcional | pagina: abre uma página de pacotes em vez do WhatsApp)
   servicos: [
-    { nome: 'Videomaker Mobile', etiqueta: 'Para negócios', destaque: true, precoRotulo: 'A partir de', preco: 'R$ 600', texto: 'Eu vou até o seu negócio, gravo e entrego Reels editados, prontos para postar.', pagina: 'videomaker/' },
-    // grupo: 'video' = aparece no cartão "Mais serviços de vídeo", logo abaixo do Videomaker | unidade: texto pequeno ao lado do preço
-    { nome: 'Festas e eventos', grupo: 'video', preco: 'Sob consulta', texto: 'Cobertura em vídeo da sua festa ou evento', mensagem: 'Olá, Débora! Vi sua bio link e quero orçamento de vídeo para festa ou evento.' },
-    { nome: 'Edição de vídeo', grupo: 'video', preco: 'R$ 150', unidade: 'por vídeo', texto: 'Já tem o vídeo? Cortes simples e legenda dinâmica', mensagem: 'Olá, Débora! Vi sua bio link e quero orçamento de edição de vídeo.' },
-    { nome: 'Landing page de vendas', etiqueta: 'Para marcas', destaque: true, preco: 'R$ 1.200', texto: 'Uma página feita para transformar visita em cliente. Já desenvolvi para marca do setor de pagamentos.', mensagem: 'Olá, Débora! Vi sua bio link e quero uma landing page de vendas.' },
-    { nome: 'Portfólio + bio link', etiqueta: 'Combo', precoAntigo: 'R$ 1.180', preco: 'R$ 990', texto: 'Tudo pronto para fechar com marcas', mensagem: 'Olá, Débora! Vi sua bio link e quero o combo portfólio + bio link.' },
-    { nome: 'Portfólio profissional', preco: 'R$ 890', texto: 'Site de uma página, do seu jeito', mensagem: 'Olá, Débora! Vi sua bio link e quero um portfólio profissional.' },
-    { nome: 'Bio link personalizada', preco: 'R$ 290', texto: 'Igual a esta, com a sua cara', mensagem: 'Olá, Débora! Vi sua bio link e quero uma bio link personalizada.' }
+    { nome: 'Videomaker Mobile', etiqueta: 'Para negócios', destaque: true, texto: 'Eu vou até o seu negócio, gravo e entrego Reels editados, prontos para postar.', pagina: 'videomaker/' },
+    // grupo: 'video' = aparece no cartão "Mais serviços de vídeo", logo abaixo do Videomaker 
+    { nome: 'Festas e eventos', grupo: 'video', texto: 'Cobertura em vídeo da sua festa ou evento', mensagem: 'Olá, Débora! Vi sua bio link e quero orçamento de vídeo para festa ou evento.' },
+    { nome: 'Edição de vídeo', grupo: 'video', texto: 'Já tem o vídeo? Cortes simples e legenda dinâmica', mensagem: 'Olá, Débora! Vi sua bio link e quero orçamento de edição de vídeo.' },
+    { nome: 'Landing page de vendas', etiqueta: 'Para marcas', destaque: true, texto: 'Uma página feita para transformar visita em cliente. Já desenvolvi para marca do setor de pagamentos.', mensagem: 'Olá, Débora! Vi sua bio link e quero uma landing page de vendas.' },
+    { nome: 'Portfólio + bio link', etiqueta: 'Combo', texto: 'Tudo pronto para fechar com marcas', mensagem: 'Olá, Débora! Vi sua bio link e quero o combo portfólio + bio link.' },
+    { nome: 'Portfólio profissional', texto: 'Site de uma página, do seu jeito', mensagem: 'Olá, Débora! Vi sua bio link e quero um portfólio profissional.' },
+    { nome: 'Bio link personalizada', texto: 'Igual a esta, com a sua cara', mensagem: 'Olá, Débora! Vi sua bio link e quero uma bio link personalizada.' }
   ],
 
   redes: [
@@ -399,11 +390,10 @@ const grupoServicos = (titulo, lista) => !lista.length ? '' : `
     ${lista.map((s) => `
     <a class="linha-servico" href="${linkServico(s)}" target="_blank" rel="noopener" data-goatcounter-click="servico-${s.nome}">
       <strong>${s.nome}${s.etiqueta ? `<span class="etiqueta-mini">${s.etiqueta}</span>` : ''}</strong>
-      <span class="valor${s.preco.startsWith("R$") ? "" : " texto"}">${s.precoAntigo ? `<s>${s.precoAntigo}</s>` : ''}<b>${s.preco}</b>${s.unidade ? `<small>${s.unidade}</small>` : ''}</span>
       ${ICONES.seta}
       <span class="descricao">${s.texto}</span>
     </a>`).join('')}
-    <p class="rodape-grupo">Toque no serviço para falar comigo no WhatsApp</p>
+    <p class="rodape-grupo">Toque no serviço para pedir um orçamento no WhatsApp</p>
   </div>`;
 
 const cartaoServico = (s) => `
@@ -411,12 +401,11 @@ const cartaoServico = (s) => `
     ${s.etiqueta ? `<span class="etiqueta">${s.etiqueta}</span>` : ''}
     <div class="topo-servico">
       <h3>${s.nome}</h3>
-      <div class="preco">${s.precoAntigo ? `<s>${s.precoAntigo}</s>` : `<small>${s.precoRotulo || 'Investimento'}</small>`}<b>${s.preco}</b></div>
     </div>
     <p>${s.texto}</p>
     ${s.pagina
       ? `<a class="quero" href="${s.pagina}" data-goatcounter-click="servico-${s.nome}">Ver pacotes ${ICONES.seta.replace('class="seta" ', '')}</a>`
-      : `<a class="quero" href="${linkServico(s)}" target="_blank" rel="noopener" data-goatcounter-click="servico-${s.nome}">${ICONES.whatsapp} Quero esse</a>`}
+      : `<a class="quero" href="${linkServico(s)}" target="_blank" rel="noopener" data-goatcounter-click="servico-${s.nome}">${ICONES.whatsapp} Pedir orçamento</a>`}
   </article>`;
 
 // Serviços com página própria (videomaker) vêm antes da chamada "Gostou desta página?"; os sites vêm depois
