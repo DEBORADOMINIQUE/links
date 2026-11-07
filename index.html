@@ -305,6 +305,9 @@ const BIO = {
     { icone: 'email', titulo: 'E-mail para propostas', texto: EMAIL, link: `mailto:${EMAIL}?subject=${encodeURIComponent('Proposta de parceria UGC')}`, clique: 'email' },
     { icone: 'cupom', titulo: 'Meus cupons', texto: 'Descontos exclusivos nas marcas que eu uso', link: '#blocoCupons', clique: 'meus-cupons' },
     { icone: 'pacotes', titulo: 'Serviços digitais', selo: 'NOVO', texto: 'Videomaker, eventos, edição, sites e bio link', link: '#blocoServicos', clique: 'servicos' },
+    // Lapida Cash: links de afiliada (o mensal fica escondido até o link ser preenchido)
+    { icone: 'organizar', titulo: 'Lapida Cash · plano anual', texto: 'Ajuda criadoras UGC a se organizarem · link de afiliada', link: 'https://pay.kiwify.com.br/bIJaRIU?afid=n7rjBCpP', clique: 'lapida-cash-anual' },
+    { icone: 'organizar', titulo: 'Lapida Cash · plano mensal', texto: 'Ajuda criadoras UGC a se organizarem · link de afiliada', link: '', clique: 'lapida-cash-mensal' }, // EDITE AQUI: link do plano mensal
     { icone: 'youtube', titulo: 'YouTube', texto: 'Vida Real de Tudo Um Pouco', link: 'https://www.youtube.com/@deboradominiques', clique: 'youtube' }, // EDITE AQUI: link do canal
     { icone: 'linkedin', titulo: 'LinkedIn', texto: 'Conecte-se comigo', link: 'https://www.linkedin.com/in/d%C3%A9bora-dominique-29b6443a8/', clique: 'linkedin' }
   ],
@@ -348,6 +351,7 @@ const ICONES = {
   cupom: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.4 11.6 12.4 2.6A2 2 0 0 0 11 2H4a2 2 0 0 0-2 2v7a2 2 0 0 0 .6 1.4l9 9a2 2 0 0 0 2.8 0l7-7a2 2 0 0 0 0-2.8zM6.5 8A1.5 1.5 0 1 1 8 6.5 1.5 1.5 0 0 1 6.5 8z"/></svg>',
   youtube: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .5 12a31 31 0 0 0 .5 4.8 3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .5-4.8 31 31 0 0 0-.5-4.8zM9.8 15.1V8.9l5.8 3.1-5.8 3.1z"/></svg>',
   copiar: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 1H4a2 2 0 0 0-2 2v14h2V3h12V1zm3 4H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H8V7h11v14z"/></svg>',
+  organizar: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h2v2h6V2h2v2h2a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2V2zM5 9v10h14V9H5zm5.6 8.2-3.3-3.3 1.4-1.4 1.9 1.9 4.6-4.6 1.4 1.4-6 6z"/></svg>',
   kit: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 3h2v9.6l3.3-3.3 1.4 1.4L12 16.4l-5.7-5.7 1.4-1.4 3.3 3.3V3zM5 19h14v2H5z"/></svg>',
   seta: '<svg class="seta" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>'
 };
